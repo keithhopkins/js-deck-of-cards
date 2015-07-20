@@ -1,0 +1,32 @@
+body {
+  background: #7B9EA8;
+}
+
+.card {
+  height: 96px;
+  width: 72px;
+  float: left;
+  margin-left: 30px;
+  margin-bottom: 10px;
+  box-shadow: 5px 5px;
+}
+
+button {
+  padding: 10px;
+  font-size: 3em;
+  background: #6FD08C;
+  border: none;
+  margin: 20px auto;
+  display: block;
+  border-radius: 10px;
+  outline: 0;
+}
+
+button:hover {
+  padding: 15px;
+  border: 2px black solid
+}
+
+
+
+
