@@ -1,20 +1,38 @@
-var showCards = document.getElementById("cards"); //gets the deal button
+var dealButton = document.getElementById("cards"); //gets the deal button
 
-showCards.onclick = function(){
-  var cardContainer = document.getElementById('container'); //gets the container div
-  cardContainer.innerHTML = ""; //clears the innerHTML
+dealButton.onclick = function(){
+  //gets the container div
+  var cardContainer = document.getElementById('container'); 
+  //clears the innerHTML
+  cardContainer.innerHTML = ""; 
   displayCards();
-  var button = document.createElement('button');
-  button.id = 'reset';
-  button.innerHTML= 'Reset!';
+  //gets body tag
   var body = document.getElementsByTagName('body')[0];
-  body.insertBefore(button,cardContainer);
-
-  var resetCards = document.getElementById('reset');
-  resetCards.onclick = function(){
-    var cardContainer = document.getElementById('container');
+  //create redeal button
+  var redealButton = document.createElement('button');
+  redealButton.id = 'redeal';
+  redealButton.innerHTML = 'Redeal!';
+  //remove deal button
+  body.removeChild(dealButton);
+  //insert redeal button
+  body.insertBefore(redealButton,cardContainer);
+  //add redeal button click function
+  redealButton.onclick = function(){
+    cardContainer.innerHTML = ""; //clears the innerHTML
+    displayCards();
+  };
+  //creates reset button
+  var resetButton = document.createElement('button');
+  resetButton.id = 'reset';
+  resetButton.innerHTML= 'Reset!';
+  //inserts reset button
+  body.insertBefore(resetButton,cardContainer);
+  //add resetButton click function
+  resetButton.onclick = function(){
     cardContainer.innerHTML = "";
-    body.removeChild(button);
+    body.removeChild(resetButton);
+    body.removeChild(redealButton);
+    body.insertBefore(dealButton,cardContainer);
   };
 };
 
