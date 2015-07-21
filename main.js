@@ -1,6 +1,6 @@
-
-
-
+if(!localStorage.getItem('deck')){
+  localStorage.setItem('deck',JSON.stringify(newDeck()));
+}
 //gets the deal button
 var dealButton = document.getElementById("cards");
 //gets cardContainer
@@ -47,7 +47,7 @@ resetButton.onclick = function(){
 };
 
 function displayCards(numCards){
-  var deck = newDeck();
+  var deck = JSON.parse(localStorage.getItem('deck'));
   var shuffledCards = shuffleCards(deck);
 
   for(var i=0; i < numCards; i++){
