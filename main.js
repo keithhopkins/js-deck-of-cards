@@ -1,47 +1,57 @@
-var dealButton = document.getElementById("cards"); //gets the deal button
 
+
+
+//gets the deal button
+var dealButton = document.getElementById("cards");
+//gets cardContainer
+var cardContainer = document.getElementById('container');
+//create input for number of cards to display
+var numCardsInput = document.createElement('input');
+numCardsInput.type = 'text';
+document.body.insertBefore(numCardsInput,dealButton);
+//create redealbutton
+var redealButton = document.createElement('button');
+redealButton.id = 'redeal';
+redealButton.innerHTML = 'Redeal!';
+//create reset button
+var resetButton = document.createElement('button');
+resetButton.id = 'reset';
+resetButton.innerHTML = 'Reset!';
+
+var numCards;
 dealButton.onclick = function(){
-  //gets the container div
-  var cardContainer = document.getElementById('container'); 
-  //clears the innerHTML
-  cardContainer.innerHTML = ""; 
-  displayCards();
-  //gets body tag
-  var body = document.getElementsByTagName('body')[0];
-  //create redeal button
-  var redealButton = document.createElement('button');
-  redealButton.id = 'redeal';
-  redealButton.innerHTML = 'Redeal!';
+  numCards=Number(numCardsInput.value);
   //remove deal button
-  body.removeChild(dealButton);
-  //insert redeal button
-  body.insertBefore(redealButton,cardContainer);
-  //add redeal button click function
-  redealButton.onclick = function(){
-    cardContainer.innerHTML = ""; //clears the innerHTML
-    displayCards();
-  };
-  //creates reset button
-  var resetButton = document.createElement('button');
-  resetButton.id = 'reset';
-  resetButton.innerHTML= 'Reset!';
-  //inserts reset button
-  body.insertBefore(resetButton,cardContainer);
-  //add resetButton click function
-  resetButton.onclick = function(){
-    cardContainer.innerHTML = "";
-    body.removeChild(resetButton);
-    body.removeChild(redealButton);
-    body.insertBefore(dealButton,cardContainer);
-  };
+  document.body.removeChild(dealButton);
+  //remove numCards input
+  document.body.removeChild(numCardsInput);
+  //add redeal button
+  document.body.insertBefore(redealButton,cardContainer);
+  //add reset button
+  document.body.insertBefore(resetButton,cardContainer);
+  cardContainer.innerHTML='';
+  displayCards(numCards);
 };
 
-function displayCards(){
+redealButton.onclick = function(){
+  cardContainer.innerHTML='';
+  displayCards(numCards);
+};
+
+resetButton.onclick = function(){
+  document.body.removeChild(redealButton);
+  document.body.removeChild(resetButton);
+  document.body.insertBefore(numCardsInput,cardContainer);
+  document.body.insertBefore(dealButton,cardContainer);
+  cardContainer.innerHTML='';
+};
+
+function displayCards(numCards){
   var deck = newDeck();
   var shuffledCards = shuffleCards(deck);
 
-  for(var i=0; i < deck.length; i++){
-    var card = document.createElement('div');//<div class = 'card'></div>
+  for(var i=0; i < numCards; i++){
+    var card = document.createElement('div');
     card.className = "card";
     var cardContainer = document.getElementById('container');
     cardContainer.appendChild(card);
@@ -87,7 +97,7 @@ function newDeck(){
 function shuffleCards(cardDeck){
   var tempDeck = cardDeck.slice();
   var shuffledDeck = [];
-
+  console.log(tempDeck);
   while(tempDeck.length>0){
     var index = Math.floor(Math.random()*tempDeck.length);
     var card = tempDeck.splice(index,1)[0];
